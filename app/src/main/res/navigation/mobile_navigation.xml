@@ -15,11 +15,33 @@
         android:id="@+id/navigation_camera"
         android:name="com.mikko.intellimap.ui.camera.CameraFragment"
         android:label="@string/title_camera"
-        tools:layout="@layout/fragment_camera" />
+        tools:layout="@layout/fragment_camera">
+        <action
+            android:id="@+id/action_navigation_camera_to_navigation_idol"
+            app:destination="@id/navigation_idol" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_notifications"
         android:name="com.mikko.intellimap.ui.notifications.NotificationsFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/navigation_idol"
+        android:name="com.mikko.intellimap.ui.idols.IdolFragment"
+        android:label="Idol"
+        tools:layout="@layout/fragment_idol">
+        <argument
+            android:name="idolName"
+            app:argType="string"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_idols_list"
+        android:name="com.mikko.intellimap.ui.idols.IdolsListFragment"
+        android:label="Idols"
+        tools:layout="@layout/fragment_idols_list">
+        <action
+            android:id="@+id/action_navigation_idols_list_to_navigation_idol"
+            app:destination="@id/navigation_idol" />
+    </fragment>
 </navigation>

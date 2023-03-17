@@ -3,7 +3,6 @@ package com.mikko.intellimap
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-//import kotlinx.android.synthetic.main.activity_start.*
 import com.mikko.intellimap.databinding.ActivityStartBinding
 
 class StartActivity : AppCompatActivity() {

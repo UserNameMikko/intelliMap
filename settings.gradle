@@ -4,6 +4,7 @@ pluginManagement {
     repositories {
         gradlePluginPortal()
         google()
+        maven { url 'https://jcenter.bintray.com/'}
         mavenCentral()
     }
 }
@@ -11,6 +12,7 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
+        maven { url 'https://jcenter.bintray.com/'}
         mavenCentral()
         maven { url 'https://jitpack.io'}
     }
