@@ -1,4 +1,4 @@
-package com.mikko.mapit.qr
+/*package com.mikko.mapit.qr
 
 import android.content.Intent
 import android.net.Uri
@@ -75,3 +75,4 @@ class BarcodeResultBottomSheet : BottomSheetDialogFragment() {
     }
 
 }
+*/

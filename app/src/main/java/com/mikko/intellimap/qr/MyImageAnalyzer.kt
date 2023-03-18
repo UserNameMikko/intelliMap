@@ -1,4 +1,4 @@
-package com.mikko.mapit.qr
+/*package com.mikko.mapit.qr
 
 import androidx.camera.core.ExperimentalGetImage
 import androidx.camera.core.ImageAnalysis
@@ -45,4 +45,4 @@ import com.google.mlkit.vision.common.InputImage
             }
         }
     }
-}
+}*/
