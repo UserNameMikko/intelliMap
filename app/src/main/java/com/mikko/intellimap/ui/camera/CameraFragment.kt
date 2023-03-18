@@ -33,7 +33,7 @@ class CameraFragment : Fragment(R.layout.fragment_camera), ResultHandler {
         Toast.makeText(binding.root.context, p0?.text?:"no data", Toast.LENGTH_SHORT).show()
         if (p0 != null) {
             val substrings = p0.text.split("/")
-            val idolName = if (substrings.size > 3) substrings[4] else ""
+            val idolName = if (substrings.size > 4) substrings[4] else ""
             findNavController().navigate(
                 CameraFragmentDirections.actionNavigationCameraToNavigationIdol(idolName)
             )

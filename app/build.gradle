@@ -18,7 +18,7 @@ android {
 
     defaultConfig {
         applicationId "com.mikko.intellimap"
-        minSdk 27
+        minSdk 24
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -37,9 +37,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    /*kotlinOptions {
+    kotlinOptions {
         jvmTarget = '1.8'
-    }*/
+    }
     buildFeatures {
         viewBinding true
         //compose true
@@ -96,7 +96,7 @@ dependencies {
     // Optional - Integration with RxJava
     implementation 'androidx.compose.runtime:runtime-rxjava2'*/
 
-    //implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'

@@ -12,13 +12,14 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+
+    </style>
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-
     </style>
 
     <style name="Theme.IntelliMap.ActionBarStyle" parent="Widget.Material3.Toolbar">
-
         <item name="android:elevation">10dp</item>
         <item name="windowActionBarOverlay">false</item>
         <item name="android:textColorPrimary">@android:color/black</item>
