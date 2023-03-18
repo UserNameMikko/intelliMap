@@ -1,9 +1,7 @@
 package com.mikko.intellimap.ui.camera
 
 import android.Manifest
-import android.hardware.Camera
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -34,11 +32,11 @@ class CameraFragment : Fragment(R.layout.fragment_camera), ResultHandler {
     override fun handleResult(p0: Result?) {
         Toast.makeText(binding.root.context, p0?.text?:"no data", Toast.LENGTH_SHORT).show()
         if (p0 != null) {
-            if (findNavController().currentDestination?.id == R.id.navigation_camera) {
-                findNavController().navigate(
-                    CameraFragmentDirections.actionNavigationCameraToNavigationIdol("$p0")
-                )
-            }
+            val substrings = p0.text.split("/")
+            val idolName = if (substrings.size > 3) substrings[4] else ""
+            findNavController().navigate(
+                CameraFragmentDirections.actionNavigationCameraToNavigationIdol(idolName)
+            )
 
         }
     }
