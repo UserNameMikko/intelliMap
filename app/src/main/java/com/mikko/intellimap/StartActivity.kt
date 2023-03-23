@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.mikko.intellimap.databinding.ActivityStartBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class StartActivity : AppCompatActivity() {
     private val binding : ActivityStartBinding by lazy { ActivityStartBinding.inflate(layoutInflater) }
     override fun onCreate(savedInstanceState: Bundle?) {
