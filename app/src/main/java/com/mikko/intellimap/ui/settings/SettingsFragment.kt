@@ -20,6 +20,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
+import java.lang.NullPointerException
 
 @AndroidEntryPoint
 class SettingsFragment: Fragment(R.layout.fragment_settings) {
@@ -30,47 +31,45 @@ class SettingsFragment: Fragment(R.layout.fragment_settings) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSettingsBinding.bind(view)
-        settingsViewModel.liveData.addCloseableObserver {
-            var imagesOfIdol = mutableListOf<String>()
-            Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
-            it.kumirs.forEach {
-                /** downloading images into external storage */
-                val imagesDirPath = ///storage/emulated/0/intelliMap/idols/images
-                    Environment.getExternalStorageDirectory().absolutePath +
-                            "/idols/images/${it.slug}" //+ "/idols/images"
+        try {
+            settingsViewModel.liveData.addCloseableObserver {
+                var imagesOfIdol = mutableListOf<String>()
+                Toast.makeText(requireContext(), "$it", Toast.LENGTH_SHORT).show()
+                it.forEach {
+                    /** downloading images into external storage */
+                    val imagesDirPath = ///storage/emulated/0/intelliMap/idols/images
+                        Environment.getExternalStorageDirectory().absolutePath +
+                                "/idols/images/${it.slug}" //+ "/idols/images"
 
-                Log.e("images dir path", imagesDirPath)
-                val audioDirPath = /////storage/emulated/0/intelliMap/idols/audio
-                    Environment.getExternalStorageDirectory().absolutePath +
-                            "/" + /*getString(R.string.app_name) +*/ "Downloads"// "/idols/audio"
-                Log.e("audio dir path", audioDirPath)
+                    Log.e("images dir path", imagesDirPath)
+                    val audioDirPath = /////storage/emulated/0/intelliMap/idols/audio
+                        Environment.getExternalStorageDirectory().absolutePath +
+                                "/" + /*getString(R.string.app_name) +*/ "Downloads"// "/idols/audio"
+                    Log.e("audio dir path", audioDirPath)
 
-                val fileImages = File(imagesDirPath)
-                if (!fileImages.exists()) {
-                    fileImages.mkdirs()
+                    val fileImages = File(imagesDirPath)
+                    if (!fileImages.exists()) {
+                        fileImages.mkdirs()
+                    }
+                    val list = fileImages.listFiles()
+                    if (!list.isNullOrEmpty())
+                        for (i in list)
+                            Log.e("image", "${i.absolutePath}\t${it.slug}")
+
+
+                    //val images = settingsViewModel.getImagesFromRemote(it.name)
                 }
-                val list = fileImages.listFiles()
-                if (!list.isNullOrEmpty())
-                    for (i in list)
-                        Log.e("image", "${i.absolutePath}\t${it.slug}")
-
-
-                //val images = settingsViewModel.getImagesFromRemote(it.name)
             }
+        } catch (n: NullPointerException){
+            Log.e("NULL", "${n.message}")
         }
-
-
-
 
         Toast.makeText(requireContext(), " sfasfa", Toast.LENGTH_SHORT).show()
         binding.getData.setOnClickListener {
             settingsViewModel.getImagesFromRemote("perun")
+            settingsViewModel.getImagesFromRemote("svarog")
 
         }
-
-    }
-
-    fun getPhotos() {
 
     }
 

@@ -18,14 +18,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.karumi.dexter.listener.single.PermissionListener
 import com.mikko.intellimap.databinding.ActivityMainBinding
 import com.mikko.intellimap.viewmodels.IdolsViewModel
 import dagger.hilt.android.AndroidEntryPoint
+
 import dev.icerock.moko.mvvm.livedata.addCloseableObserver
 import java.io.File
 
@@ -34,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private lateinit var navHostController: NavController
-    private val idolsvm :IdolsViewModel by viewModels()
+    private val idolsViewModel :IdolsViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT
         super.onCreate(savedInstanceState)
@@ -76,7 +74,7 @@ class MainActivity : AppCompatActivity() {
                 destination.id !in homeDisplays
             )
         }
-        val x = idolsvm.liveData.addCloseableObserver {
+        idolsViewModel.liveData.addCloseableObserver {
             Log.e("FROM SERV", "$it")
             Toast.makeText(binding.root.context, "$it", Toast.LENGTH_LONG).show()
         }

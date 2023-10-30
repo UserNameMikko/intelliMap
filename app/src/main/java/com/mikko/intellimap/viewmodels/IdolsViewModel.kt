@@ -3,6 +3,7 @@ package com.mikko.intellimap.viewmodels
 import com.mikko.intellimap.R
 import com.mikko.intellimap.common.GetAllDataFromRemote
 import com.mikko.intellimap.data.IdolData
+import com.mikko.intellimap.data.IdolDataItem
 import com.mikko.intellimap.retrofit.RetrofitServices
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.icerock.moko.mvvm.livedata.MutableLiveData
@@ -24,24 +25,26 @@ class IdolsViewModel @Inject constructor() : ViewModel() {
     private val _photosFlow = MutableLiveData<Map<String, List<Int>>>(mapOf())
     val photosFlow = _photosFlow.readOnly()
     private var mService: RetrofitServices = GetAllDataFromRemote.retrofitService
-    val liveData = MutableLiveData<IdolData>(IdolData())
+    val liveData = MutableLiveData<MutableList<IdolDataItem>>(mutableListOf())
 
     init {
         getAllIdols()
     }
     private fun getAllIdols() {
         MainScope().launch {
-            mService.getData().enqueue(object : Callback<IdolData>{
+            mService.getData().enqueue(object : Callback<MutableList<IdolDataItem>>{
                 override fun onResponse(
-                    call: Call<IdolData>,
-                    response: Response<IdolData>
+                    call: Call<MutableList<IdolDataItem>>,
+                    response: Response<MutableList<IdolDataItem>>
                 ) {
-                    println("RESPONSE FROM SERVER Idol VM: ${response.body()}")
-                    liveData.postValue(response.body()!!)
+                    if (response.body() != null) {
+                        println("RESPONSE FROM SERVER Idol VM: ${response.body()}")
+                        liveData.postValue(response.body()!!)
+                    }
                     println(response.code())
                 }
 
-                override fun onFailure(call: Call<IdolData>, t: Throwable) {
+                override fun onFailure(call: Call<MutableList<IdolDataItem>>, t: Throwable) {
                     println("RESPONSE FROM SERVER:")
                     println(t.message)
                 }
